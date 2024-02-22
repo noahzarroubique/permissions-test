@@ -12,7 +12,7 @@ jobs:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
 
       - name: set env variable
-        run: echo "NEW_PERMISSIONS=false" >> "$GITHUB_ENV"
+        run: echo "NEW_PERMISSIONS=true" >> "$GITHUB_ENV"
 
       - name: add comment to PR
         if: env.NEW_PERMISSIONS == 'true'
