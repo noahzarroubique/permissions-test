@@ -57,6 +57,8 @@ jobs:
   diff-permissions:
     needs: [build-develop, build-branch]
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Download permissions
         uses: actions/download-artifact@v1
@@ -68,10 +70,8 @@ jobs:
 
       - run: printf "⚠ New permission(s) found\n\n\`\`\`\n" > pr-comment.txt && cat permissions-diff.txt >> pr-comment.txt
 
-      - name: comment PR
+      - name: add comment to PR
         if: env.NEW_PERMISSIONS == 'true'
-        uses: machine-learning-apps/pr-comment@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.personaltoken }}
+        uses: mshick/add-pr-comment@v2
         with:
-          path: pr-comment.txt
+          message-path: pr-comment.txt
