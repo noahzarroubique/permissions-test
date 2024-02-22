@@ -14,6 +14,9 @@ jobs:
       - name: set env variable
         run: echo "NEW_PERMISSIONS=true" >> "$GITHUB_ENV"
 
+      - name: create pr-comment.txt
+        run: echo "Test Message" > pr-comment.txt
+
       - name: add comment to PR
         if: env.NEW_PERMISSIONS == 'true'
         uses: mshick/add-pr-comment@v2
