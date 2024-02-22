@@ -8,11 +8,16 @@ on:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
 
       - name: set env variable
-        run: echo "NEW_PERMISSIONS=false" >> "$GITHUB_ENV"
+        run: echo "NEW_PERMISSIONS=true" >> "$GITHUB_ENV"
+
+      - name: create pr-comment.txt
+        run: echo "Test Message" > pr-comment.txt
 
       - name: add comment to PR
         if: env.NEW_PERMISSIONS == 'true'
