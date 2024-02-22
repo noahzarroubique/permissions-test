@@ -46,13 +46,13 @@ jobs:
       - name: Build develop APK
         run: ./gradlew app:assembleDebug
       - name: Get permissions
-        run: $ANDROID_HOME/build-tools/33.0.1/aapt d permissions app/build/outputs/apk/debug/app-debug.apk > permissions-develop.txt
+        run: $ANDROID_HOME/build-tools/33.0.1/aapt d permissions app/build/outputs/apk/debug/app-debug.apk > permissions-branch.txt
 
       - name: Upload permissions file develop
         uses: actions/upload-artifact@v1
         with:
           name: permissions
-          path: permissions-build.txt
+          path: permissions-branch.txt
 
   diff-permissions:
     needs: [build-develop, build-branch]
