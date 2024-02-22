@@ -1,0 +1,21 @@
+name: Test PR Comment
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened]
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+
+      - name: set env variable
+        run: echo "NEW_PERMISSIONS=false" >> "$GITHUB_ENV"
+
+      - name: add comment to PR
+        if: env.NEW_PERMISSIONS == 'true'
+        uses: mshick/add-pr-comment@v2
+        with:
+          message-path: pr-comment.txt
